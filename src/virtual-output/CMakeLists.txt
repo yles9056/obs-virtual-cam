@@ -70,3 +70,10 @@ target_link_libraries(obs-virtualoutput
 	Qt5::Core
 	Qt5::Widgets)
 	
+if(MSVC)
+	foreach(t EXE SHARED MODULE)
+		set(CMAKE_${t}_LINKER_FLAGS "${CMAKE_${t}_LINKER_FLAGS} /OPT:REF")
+		set(CMAKE_${t}_LINKER_FLAGS_DEBUG "${CMAKE_${t}_LINKER_FLAGS_DEBUG} /INCREMENTAL:NO")
+		set(CMAKE_${t}_LINKER_FLAGS_RELWITHDEBINFO "${CMAKE_${t}_LINKER_FLAGS_RELWITHDEBINFO} /INCREMENTAL:NO /PDBSTRIPPED")
+	endforeach()
+endif()
