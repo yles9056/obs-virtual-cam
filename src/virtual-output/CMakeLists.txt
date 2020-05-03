@@ -33,6 +33,7 @@ set(PTHREAD_LIB "PTHREAD_LIB-NOTFOUND" CACHE FILEPATH "PTHREAD library")
 	
 set(virtualoutput_SOURCES
 	virtual_main.cpp
+	virtualoutput.rc
 	virtual_output.cpp
 	virtual_properties.cpp
 	virtual_filter.cpp
@@ -50,6 +51,13 @@ set(virtualoutput_HEADERS
 	../queue/share_queue.h
 	)
 	
+if(WIN32)
+	set(OBS_VIRTUALOUTPUT_VERSION_MAJOR 2)
+	set(OBS_VIRTUALOUTPUT_VERSION_MINOR 0)
+	set(OBS_VIRTUALOUTPUT_VERSION_PATCH 4)
+	set(OBS_VIRTUALOUTPUT_VERSION_STRING "2.0.4")
+	configure_file(${CMAKE_CURRENT_SOURCE_DIR}/virtualoutput.rc.in ${CMAKE_CURRENT_SOURCE_DIR}/virtualoutput.rc)
+endif()
 
 add_library(obs-virtualoutput MODULE
 	${virtualoutput_SOURCES}

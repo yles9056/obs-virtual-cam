@@ -5,6 +5,7 @@ find_package(FFmpeg COMPONENTS swscale REQUIRED)
 
 set(virtualsource_SOURCES
 	dllmain.cpp
+	virtualsource.rc
 	virtual-cam.cpp
 	virtual-audio.cpp
 	clock.cpp
@@ -19,6 +20,14 @@ set(virtualsource_HEADERS
 	../queue/share_queue_read.h
 	../queue/share_queue.h
 	)
+
+if(WIN32)
+	set(OBS_VIRTUALSOURCE_VERSION_MAJOR 2)
+	set(OBS_VIRTUALSOURCE_VERSION_MINOR 0)
+	set(OBS_VIRTUALSOURCE_VERSION_PATCH 4)
+	set(OBS_VIRTUALSOURCE_VERSION_STRING "2.0.4")
+	configure_file(${CMAKE_CURRENT_SOURCE_DIR}/virtualsource.rc.in ${CMAKE_CURRENT_SOURCE_DIR}/virtualsource.rc)
+endif()
 	
 set(DShowPath "../../dshowdeps/include")
 
@@ -63,6 +72,9 @@ if(MSVC)
       endif()
     endforeach()
 endif()
-SET(CMAKE_MODULE_LINKER_FLAGS_DEBUG "${CMAKE_MODULE_LINKER_FLAGS_DEBUG} /SAFESEH:NO")
-SET(CMAKE_MODULE_LINKER_FLAGS_RELEASE "${CMAKE_MODULE_LINKER_FLAGS_RELEASE} /SAFESEH:NO")
+
+set_target_properties(obs-virtualsource
+	PROPERTIES
+	VERSION "2.0.4"
+	PRODUCTNAME "OBS Virtualcam Plugin")
 	
