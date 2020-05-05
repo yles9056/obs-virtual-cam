@@ -1,9 +1,11 @@
-﻿name: 'CI Windows On-Push'
+name: 'CI Windows Release'
 
 on:
   push:
-    branches:
-      - master
+    paths-ignore:
+      - 'docs/**'
+    tags:
+      - '[23].[0-9]+.[0-9]+'
 
 jobs:
   windows:
@@ -125,7 +127,7 @@ jobs:
       - name: 'Set release filename'
         shell: bash
         run: |
-          FILENAME="OBS-Virtualcam-${{ env.GIT_TAG }}-Windows"
+          FILENAME="obs-virtualcam-${{ env.GIT_TAG }}-Windows"
           echo "::set-env name=WIN_FILENAME::$FILENAME"
       - name: 'Package obs-virtual-cam'
         working-directory: ${{ github.workspace }}/obs-virtual-cam
@@ -164,9 +166,50 @@ jobs:
         with:
           name: '${{ env.GIT_TAG }}-Windows'
           path: ${{ github.workspace }}\obs-virtual-cam\release\*.zip
-      - name: 'Publish ${{ env.WIN_FILENAME }}-Windows-Installer.exe'
+      - name: 'Publish ${{ env.WIN_FILENAME }}-Installer.exe'
         if: success()
         uses: actions/upload-artifact@v2-preview
         with:
           name: '${{ env.GIT_TAG }}-Windows-Installer'
           path: ${{ github.workspace }}\obs-virtual-cam\build-package\*.exe
+          
+  make-release:
+    name: 'Create and upload release'
+    runs-on: [ubuntu-latest]
+    needs: [windows]
+    steps:
+      - name: 'Get the version'
+        shell: bash
+        id: get_version
+        run: |
+          echo ::set-env name=TAG_VERSION::${GITHUB_REF/refs\/tags\//}
+      - name: 'Create Release'
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.TAG_VERSION }}
+          release_name: obs-virtualcam ${{ env.TAG_VERSION }}
+          draft: false
+          prerelease: false
+      - name: 'Download release artifacts'
+        uses: actions/download-artifact@v2-preview
+      - name: 'Upload Windows .zip artifact to release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/${{ env.TAG_VERSION }}-Windows/obs-virtualcam-${{ env.TAG_VERSION }}-Windows.zip
+          asset_name: obs-virtualcam-${{ env.TAG_VERSION }}-Windows.zip
+          asset_content_type: application/zip
+      - name: 'Upload Windows .exe artifact to release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/${{ env.TAG_VERSION }}-Windows-Installer/obs-virtualcam-${{ env.TAG_VERSION }}-Windows-installer.exe
+          asset_name: obs-virtualcam-${{ env.TAG_VERSION }}-Windows-Installer.exe
+          asset_content_type: application/zip
