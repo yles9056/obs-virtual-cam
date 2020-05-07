@@ -11,7 +11,7 @@ obs-virutalcam is a plugin for obs-studio , transforming the output video to a v
 * **virtual source** : Four directshow Interfaces which can use in 3rd party software.
 
 # Install
-The installer and compressed file can be found in [Release Page](https://github.com/CatxFish/obs-virtual-cam/releases). Using installer is recommended, but if you want to use compressed file to install manually , please follow these instructions.
+The installer and compressed file can be found in [Release Page](https://github.com/Fenrirthviti/obs-virtual-cam/releases). Using installer is recommended, but if you want to use compressed file to install manually , please follow these instructions.
 
 1. Unzip OBS-VirtualCam.zip and put it to your obs-studio install folder.
 2. Run CMD as Administrator and register 32bit directshow source
