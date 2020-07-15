@@ -1,7 +1,10 @@
 #include <obs-module.h>
 #include <util/config-file.h>
 #include "virtual_output.h"
+#ifdef QT_DISABLED
 #include "virtual_properties.h"
+#endif
+#include "../queue/share_queue_write.h"
 #include "get_format.h"
 #include "hflip.h"
 

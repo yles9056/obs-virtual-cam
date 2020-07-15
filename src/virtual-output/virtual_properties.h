@@ -5,13 +5,6 @@
 #include "obs.h"
 #include "../queue/share_queue_write.h"
 
-struct vcam_update_data{
-	bool horizontal_flip = false;
-	bool keep_ratio = false;
-	int delay = 0;
-	int mode = 0;
-};
-
 namespace Ui {
 class VirtualProperties;
 }
