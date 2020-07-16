@@ -98,6 +98,8 @@ static bool virtual_output_start(void *data)
 	double fps = video_output_get_frame_rate(video);
 	uint64_t interval = static_cast<int64_t>(1000000000 / fps);
 
+	if (out_data->delay < 5)
+		out_data->delay = 5;
 
 	start = shared_queue_create(&out_data->video_queue,
 		out_data->video_mode, fmt, out_data->width, out_data->height,
