@@ -77,4 +77,6 @@ set_target_properties(obs-virtualsource
 	PROPERTIES
 	VERSION "2.0.4"
 	PRODUCTNAME "OBS Virtualcam Plugin")
+
+install_obs_core(obs-virtualsource)
 	

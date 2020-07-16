@@ -1,12 +1,15 @@
 #include <obs-module.h>
+#include "virtual_output.h"
+
+#ifdef QT_DISABLED
 #include <QMainWindow>
 #include <QAction>
 #include <obs-frontend-api.h>
-#include "virtual_output.h"
 #include "virtual_filter.h"
 #include "virtual_properties.h"
 
 VirtualProperties* virtual_prop;
+#endif
 
 OBS_DECLARE_MODULE()
 OBS_MODULE_USE_DEFAULT_LOCALE("obs-virtual_output", "en-US")
@@ -14,6 +17,7 @@ OBS_MODULE_USE_DEFAULT_LOCALE("obs-virtual_output", "en-US")
 bool obs_module_load(void)
 {
 	virtual_output_init();
+#ifdef QT_DISABLED
 	virtual_filter_init();
 
 	QMainWindow* main_window = (QMainWindow*)obs_frontend_get_main_window();
@@ -30,6 +34,6 @@ bool obs_module_load(void)
 	};
 
 	action->connect(action, &QAction::triggered, menu_cb);
-
+#endif
 	return true;
 }

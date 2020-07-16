@@ -116,7 +116,7 @@ const AMOVIESETUP_FILTER AMSFilterA =
 CFactoryTemplate g_Templates[NUM_VIDEO_FILTERS + 1] =
 {
 	{
-		L"OBS-Camera",
+		L"Streamlabs OBS Virtual Webcam",
 		&CLSID_OBS_VirtualV,
 		CreateInstance,
 		NULL,

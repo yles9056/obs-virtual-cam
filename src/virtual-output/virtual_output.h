@@ -3,6 +3,13 @@
 
 #include <util/threading.h>
 
+struct vcam_update_data{
+	bool horizontal_flip = false;
+	bool keep_ratio = false;
+	int delay = 0;
+	int mode = 0;
+};
+
 void virtual_output_init();
 void virtual_output_terminate();
 void virtual_output_enable();
