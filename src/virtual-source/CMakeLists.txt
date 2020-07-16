@@ -78,10 +78,5 @@ set_target_properties(obs-virtualsource
 	VERSION "2.0.4"
 	PRODUCTNAME "OBS Virtualcam Plugin")
 
-install(
-	FILES "../../util/reg_path.reg"
-	DESTINATION "./bin/64bit"
-)
-
 install_obs_core(obs-virtualsource)
 	
