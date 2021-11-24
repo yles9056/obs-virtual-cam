@@ -13,9 +13,9 @@ STDAPI AMovieSetupUnregisterServer(CLSID clsServer);
 
 #define NUM_VIDEO_FILTERS 4
 
-// {27B05C2D-93DC-474A-A5DA-9BBA34CB2A9C}
+// {8EE74B0A-EC26-430A-9327-981CB7C8540D}
 DEFINE_GUID(CLSID_OBS_VirtualV,
-	0x27b05c2d, 0x93dc, 0x474a, 0xa5, 0xda, 0x9b, 0xba, 0x34, 0xcb, 0x2a, 0x9c);
+	0x8ee74b0a, 0xec26, 0x430a, 0x93, 0x27, 0x98, 0x1c, 0xb7, 0xc8, 0x54, 0x0d);
 
 DEFINE_GUID(CLSID_OBS_VirtualV2,
 	0x27b05c2d, 0x93dc, 0x474a, 0xa5, 0xda, 0x9b, 0xba, 0x34, 0xcb, 0x2a, 0x9d);
@@ -116,7 +116,7 @@ const AMOVIESETUP_FILTER AMSFilterA =
 CFactoryTemplate g_Templates[NUM_VIDEO_FILTERS + 1] =
 {
 	{
-		L"Streamlabs OBS Virtual Webcam",
+		L"Kensington Konnect Virtual Camera",
 		&CLSID_OBS_VirtualV,
 		CreateInstance,
 		NULL,

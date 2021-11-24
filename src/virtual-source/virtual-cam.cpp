@@ -241,9 +241,9 @@ bool CVCamStream::ListSupportFormat()
 		format_list.empty();
 	
 	format_list.push_back(struct format(1920, 1080, 333333));
-	format_list.push_back(struct format(1280, 720, 333333));
-	format_list.push_back(struct format(960, 540, 333333));
-	format_list.push_back(struct format(640, 360, 333333));
+	//format_list.push_back(struct format(1280, 720, 333333));
+	//format_list.push_back(struct format(960, 540, 333333));
+	//format_list.push_back(struct format(640, 360, 333333));
 
 	return true;
 }
